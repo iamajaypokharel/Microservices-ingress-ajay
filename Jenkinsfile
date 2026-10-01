@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    options {
+        disableConcurrentBuilds()
+        timeout(time: 45, unit: 'MINUTES')
+        timestamps()
+
     environment {
         DOCKER_HUB_REPO = 'ajaypokharel444/microservice-app-ajayman'
         K8S_CLUSTER_NAME = 'kastro-cluster'
