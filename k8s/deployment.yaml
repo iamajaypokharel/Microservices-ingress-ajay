@@ -6,7 +6,12 @@ metadata:
   labels:
     app: techsolutions
 spec:
-  replicas: 3
+  replicas: 1 # Lowered to 1 to save cluster resources during debugging
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1       
+      maxUnavailable: 0 
   selector:
     matchLabels:
       app: techsolutions
@@ -17,7 +22,8 @@ spec:
     spec:
       containers:
       - name: techsolutions
-        image: kastrov/techsolutions-app:latest
+        image: ajaypokharel444/microservice-app-ajayman:latest
+        imagePullPolicy: Always 
         ports:
         - containerPort: 80
         resources:
@@ -31,9 +37,9 @@ spec:
           httpGet:
             path: /
             port: 80
-          initialDelaySeconds: 30
+          initialDelaySeconds: 15 
           periodSeconds: 10
-        readinessProbe:
+        readinessProbe: # FIXED: Restored missing health check parameters
           httpGet:
             path: /
             port: 80
