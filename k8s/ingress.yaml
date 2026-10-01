@@ -15,7 +15,7 @@ spec:
     - techsolutions.yourdomain.com
     secretName: techsolutions-tls
   rules:
-  - host: techsolutions.yourdomain.com
+  - host: app.ajaypokharel.com.np
     http:
       paths:
       - path: /(.*)
